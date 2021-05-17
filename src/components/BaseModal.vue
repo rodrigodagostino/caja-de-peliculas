@@ -1,0 +1,81 @@
+<template>
+	<div class="modal-container">
+		<div class="modal">
+			<header class="modal-header">
+				<h3 class="modal-title"><slot name="title"></slot></h3>
+				<BaseButton
+					type="button"
+					variation="text-neutral"
+					icon-class="fas fa-times"
+					span-class="screen-reader-text"
+					@click="$emit('close-modal')"
+				>
+					<template #default>Cerrar ventana modal</template>
+				</BaseButton>
+			</header>
+			<div class="modal-content">
+				<slot></slot>
+			</div>
+		</div>
+		<div class="backdrop" @click="$emit('close-modal')"></div>
+	</div>
+</template>
+
+<script>
+import BaseButton from '@/components/BaseButton.vue'
+
+export default {
+	components: {
+		BaseButton,
+	},
+	emits: [ 'close-modal' ],
+}
+</script>
+
+<style scoped>
+.modal-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -56%);
+	width: 80%;
+	max-width: 57.5rem;
+	margin: 0;
+	border-radius: 12px;
+	padding: 1rem;
+	background-color: var(--gray-950);
+	z-index: 100;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.modal-title {
+	padding: 0 1rem;
+}
+
+.modal-content {
+	margin-top: 1rem;
+}
+
+.backdrop {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.75);
+}
+</style>

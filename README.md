@@ -1,4 +1,4 @@
-# la-caja-de-peliculas
+# Caja de Películas
 
 ## Project setup
 ```
