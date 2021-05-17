@@ -43,7 +43,7 @@ export default {
 			this.isFetching = true
 			this.searchResults = []
 			const apiKey = ***REMOVED***
-			const apiUrl = 'http://www.omdbapi.com'
+			const apiUrl = 'https://www.omdbapi.com'
 			fetch( `${ apiUrl }/?apikey=${ apiKey }&s=${ searchTerm }` )
 				.then( response => response.json() )
 				.then( data => {
@@ -65,8 +65,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
-
 .search-results {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);

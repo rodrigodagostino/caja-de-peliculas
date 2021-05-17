@@ -95,7 +95,7 @@ export default {
 			this.isFetching = true
 			this.movieData = {}
 			const apiKey = ***REMOVED***
-			const apiUrl = 'http://www.omdbapi.com'
+			const apiUrl = 'https://www.omdbapi.com'
 			fetch( `${ apiUrl }/?apikey=${ apiKey }&i=${ id }` )
 				.then( response => response.json() )
 				.then( data => {

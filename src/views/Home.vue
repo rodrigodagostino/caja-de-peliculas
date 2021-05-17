@@ -39,8 +39,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
-
 .welcome-section__arrow {
 	width: 6rem;
 	margin: -2rem auto 0;

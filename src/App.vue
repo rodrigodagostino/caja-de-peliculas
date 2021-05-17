@@ -141,9 +141,6 @@ table {
 /**
  * Base styles.
  */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap');
-
 body {
 	font-family: 'Roboto', Avenir, Helvetica, Arial, sans-serif;
 	font-size: 1rem;
