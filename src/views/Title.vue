@@ -16,7 +16,7 @@
 							</p>
 						</div>
 						<div class="title__header-column">
-							<BaseRating :radius="30" :progress="movieData.imdbRating" stroke="4" />
+							<BaseRating :radius="30" :progress="+movieData.imdbRating" :stroke="4" />
 						</div>
 					</header>
 					<section class="title__body">

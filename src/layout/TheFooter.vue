@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton'
+import BaseButton from '@/components/BaseButton.vue'
 
 export default {
 	components: {
