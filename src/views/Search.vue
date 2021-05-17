@@ -58,7 +58,6 @@ export default {
 		},
 	},
 	created() {
-		document.title = 'Caja de Películas'
 		this.fetchMoviesData( this.$route.query.q )
 	},
 }

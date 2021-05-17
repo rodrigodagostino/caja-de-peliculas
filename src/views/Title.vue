@@ -122,7 +122,6 @@ export default {
 		},
 	},
 	created() {
-		document.title = 'Caja de Películas'
 		this.fetchMovieData( this.$route.params.id )
 	},
 }

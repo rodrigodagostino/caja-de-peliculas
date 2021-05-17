@@ -32,9 +32,6 @@ export default {
 			selectedMovieId: null,
 		}
 	},
-	created() {
-		document.title = 'Caja de Películas'
-	},
 }
 </script>
 
