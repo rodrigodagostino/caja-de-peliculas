@@ -28,12 +28,12 @@ export default {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 2rem;
 }
 
 .site-title {
 	font-size: 1.5rem;
 	line-height: 1;
+	margin-top: 2rem;
 	transition: font-size 0.32s ease;
 }
 

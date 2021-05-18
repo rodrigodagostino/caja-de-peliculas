@@ -12,6 +12,6 @@
 
 <style>
 .site-main {
-	margin: 2rem 0;
+	margin: 3.25rem 0;
 }
 </style>

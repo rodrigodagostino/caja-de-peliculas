@@ -1,17 +1,15 @@
 <template>
-	<div class="search">
-		<section class="content">
-			<transition name="slide-fade" leave-active-class="fade-leave-active" mode="out-in" type="animation">
-				<BaseSpinner v-if="isFetching" size="medium" />
-				<ul v-else-if="!isFetching && searchResults?.length" class="search-results">
-					<SearchResult v-for="result in searchResults" :result="result" :key="result.imdbID" />
-				</ul>
-				<p v-else-if="!isFetching && isTitleNotFound" class="search-not-found">
-					No se han encontrado resultados para <strong>“{{ $route.query.q }}”</strong>.
-				</p>
-			</transition>
-		</section>
-	</div>
+	<section class="content">
+		<transition name="slide-fade" leave-active-class="fade-leave-active" mode="out-in" type="animation">
+			<BaseSpinner v-if="isFetching" size="medium" />
+			<ul v-else-if="!isFetching && searchResults?.length" class="search-results">
+				<SearchResult v-for="result in searchResults" :result="result" :key="result.imdbID" />
+			</ul>
+			<p v-else-if="!isFetching && isTitleNotFound" class="search-not-found">
+				No se han encontrado resultados para <strong>“{{ $route.query.q }}”</strong>.
+			</p>
+		</transition>
+	</section>
 </template>
 
 <script>
@@ -92,7 +90,7 @@ export default {
 	}
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 42.5em) {
 	.search-results {
 		grid-template-columns: repeat(3, 1fr);
 	}

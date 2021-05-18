@@ -1,17 +1,15 @@
 <template>
 	<li class="search-result">
 		<picture class="search-result__poster">
-			<img
-				:src="result.Poster"
-				class="search-result__poster-image"
-				:alt="result.Title"
-			/>
+			<img :src="result.Poster" class="search-result__poster-image" :alt="result.Title" />
 		</picture>
 		<div class="search-result__info">
 			<h3 class="search-result__title">{{ result.Title }}</h3>
 			<p class="search-result__year">{{ result.Year }}</p>
 		</div>
-		<router-link :to="`/title/${result.imdbID}`" class="search-result__link">Ir a información detallada de {{ result.Title }}</router-link>
+		<router-link :to="`/title/${result.imdbID}`" class="search-result__link"
+			>Ir a información detallada de {{ result.Title }}</router-link
+		>
 	</li>
 </template>
 
@@ -31,7 +29,7 @@ export default {
 	border-radius: 12px;
 	overflow: hidden;
 	width: 100%;
-	max-width: 320px;
+	max-width: 17.5rem;
 	display: block;
 	transition: transform 0.32s ease, box-shadow 0.32s ease;
 	will-change: transform;
@@ -81,7 +79,7 @@ export default {
 }
 
 .search-result__title {
-	font-size: 1rem;
+	font-size: 1.25rem;
 	line-height: 1.4;
 }
 
@@ -98,6 +96,12 @@ export default {
 	bottom: 0;
 	left: 0;
 	text-indent: -9999px;
+}
+
+@media screen and (min-width: 30rem) {
+	.search-result__title {
+		font-size: 1.125rem;
+	}
 }
 
 @media screen and (min-width: 53.75rem) {

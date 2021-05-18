@@ -1,5 +1,5 @@
 <template>
-	<div class="title">
+	<section class="content">
 		<transition name="slide-fade" leave-active-class="fade-leave-active" mode="out-in" type="animation">
 			<BaseSpinner v-if="isFetching" size="medium" />
 			<div v-else-if="!isFetching && movieData.hasOwnProperty('Title')" class="title__overview">
@@ -60,7 +60,7 @@
 				</BaseModal>
 			</transition>
 		</teleport>
-	</div>
+	</section>
 </template>
 
 <script>

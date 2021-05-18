@@ -46,8 +46,8 @@ export default {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -56%);
-	width: 80%;
-	max-width: 57.5rem;
+	width: 90%;
+	max-width: 53.75rem;
 	margin: 0;
 	border-radius: 12px;
 	padding: 1rem;
@@ -77,5 +77,12 @@ export default {
 	left: 0;
 	z-index: 10;
 	background-color: rgba(0, 0, 0, 0.75);
+}
+
+@media screen and (max-width: 46.25em) and (orientation: landscape) {
+	.modal {
+		width: 64%;
+		transform: translate(-50%, -50%);
+	}
 }
 </style>
