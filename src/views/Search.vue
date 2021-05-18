@@ -40,7 +40,7 @@ export default {
 			this.isTitleNotFound = false
 			this.isFetching = true
 			this.searchResults = []
-			const apiKey = ***REMOVED***
+			const apiKey = process.env.VUE_APP_OMDB_API_KEY
 			const apiUrl = 'https://www.omdbapi.com'
 			fetch( `${ apiUrl }/?apikey=${ apiKey }&s=${ searchTerm }` )
 				.then( response => response.json() )

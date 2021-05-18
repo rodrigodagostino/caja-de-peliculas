@@ -94,7 +94,7 @@ export default {
 		fetchMovieData( id ) {
 			this.isFetching = true
 			this.movieData = {}
-			const apiKey = ***REMOVED***
+			const apiKey = process.env.VUE_APP_OMDB_API_KEY
 			const apiUrl = 'https://www.omdbapi.com'
 			fetch( `${ apiUrl }/?apikey=${ apiKey }&i=${ id }` )
 				.then( response => response.json() )
@@ -112,7 +112,7 @@ export default {
 		},
 		fetchYouTubeVideoData() {
 			this.youTubeVideoData = {}
-			const apiKey = ***REMOVED***
+			const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY
 			const q = encodeURI( this.movieData.Title + ' ' + this.movieData.Year + ' trailer'.toLowerCase() )
 			const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
 			fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )
