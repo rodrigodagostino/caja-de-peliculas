@@ -29,7 +29,7 @@
 					</section>
 					<footer class="title__footer">
 						<BaseButton type="button" icon-class="fas fa-play" @click="openTrailerModal">
-							<template #default>Ver adelanto</template>
+							<template #default>Ver avance</template>
 						</BaseButton>
 						<BaseButton href="#" variation="text-neutral" icon-class="fas fa-share-alt" />
 					</footer>

@@ -4,7 +4,7 @@
 			<h1 class="site-title">
 				<router-link to="./">
 					<i class="fas fa-film"></i>
-					<span>La Caja de Películas</span>
+					<span>Caja de Películas</span>
 				</router-link>
 			</h1>
 			<SearchBox />
