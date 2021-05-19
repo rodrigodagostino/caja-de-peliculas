@@ -64,11 +64,12 @@ export default {
 <style scoped>
 .search-results {
 	display: grid;
-	grid-template-columns: repeat(1, 1fr);
+	grid-template-columns: 1fr;
 	column-gap: 1.25rem;
 	justify-items: center;
 	align-items: flex-start;
 	row-gap: 2rem;
+	list-style: none;
 }
 
 .search-not-found {
@@ -84,7 +85,7 @@ export default {
 
 @media screen and (min-width: 30rem) {
 	.search-results {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		column-gap: 2rem;
 		row-gap: 3rem;
 	}
@@ -92,13 +93,13 @@ export default {
 
 @media screen and (min-width: 42.5em) {
 	.search-results {
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(3, minmax(0,1fr));
 	}
 }
 
-@media screen and (min-width: 53.75em) {
+@media screen and (min-width: 56em) {
 	.search-results {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(4, minmax(0,1fr));
 	}
 }
 </style>

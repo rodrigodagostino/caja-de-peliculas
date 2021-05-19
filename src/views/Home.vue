@@ -55,15 +55,5 @@ export default {
 	.welcome-section__text {
 		max-width: 80%;
 	}
-
-	.search-results {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@media screen and (min-width: 53.75em) {
-	.search-results {
-		grid-template-columns: repeat(4, 1fr);
-	}
 }
 </style>

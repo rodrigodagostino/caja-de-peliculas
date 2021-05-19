@@ -8,21 +8,17 @@
 				</picture>
 				<div class="title__content">
 					<header class="title__header">
-						<div class="title__header-column">
-							<h3 class="title__title">{{ movieData.Title }}</h3>
-							<p class="title__subtitle">
-								<span class="title__year">{{ movieData.Year }}</span>
-								<span class="title__director">{{ movieData.Director }}</span>
-							</p>
-						</div>
-						<div class="title__header-column">
-							<BaseRating :radius="30" :progress="+movieData.imdbRating" :stroke="4" />
+						<h3 class="title__title">{{ movieData.Title }}</h3>
+						<div class="title__subtitle">
+							<span class="title__year">{{ movieData.Year }}</span>
+							<span class="title__director">{{ movieData.Director }}</span>
 						</div>
 					</header>
 					<section class="title__body">
 						<aside class="title__meta">
 							<span class="title__runtime">{{ movieData.Runtime }}</span>
 							<span class="title__genre">{{ movieData.Genre }}</span>
+							<RatingRing class="title__rating" :radius="20" :progress="+movieData.imdbRating" :stroke="4" />
 						</aside>
 						<p class="title__plot">{{ movieData.Plot }}</p>
 						<p class="title__cast">{{ movieData.Actors }}</p>
@@ -66,7 +62,7 @@
 <script>
 import BaseButton from '@/components/BaseButton.vue'
 import BaseModal from '@/components/BaseModal.vue'
-import BaseRating from '@/components/BaseRating.vue'
+import RatingRing from '@/components/RatingRing.vue'
 import BaseSpinner from '@/components/BaseSpinner.vue'
 
 export default {
@@ -74,7 +70,7 @@ export default {
 	components: {
 		BaseButton,
 		BaseModal,
-		BaseRating,
+		RatingRing,
 		BaseSpinner,
 	},
 	data() {
@@ -112,13 +108,17 @@ export default {
 		},
 		fetchYouTubeVideoData() {
 			this.youTubeVideoData = {}
-			const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY
-			const q = encodeURI( this.movieData.Title + ' ' + this.movieData.Year + ' trailer'.toLowerCase() )
-			const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
-			fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )
-				.then( response => response.json() )
-				.then( data => this.youTubeVideoData = data.items[ 0 ] )
-				.catch( error => console.error( error ) )
+			if ( this.movieData.Title ) {
+				const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY
+				const q = encodeURI(
+					this.movieData.Title.replace( '&', 'and' ) + ' ' + this.movieData.Year + ' trailer'.toLowerCase(),
+				)
+				const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
+				fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )
+					.then( response => response.json() )
+					.then( data => this.youTubeVideoData = data.items[ 0 ] )
+					.catch( error => console.error( error ) )
+			}
 		},
 	},
 	created() {
@@ -131,46 +131,30 @@ export default {
 .title__overview {
 	display: flex;
 	flex-direction: column;
-	margin: 0 auto;
+	background: linear-gradient(160deg, var(--gray-850) 0%, var(--gray-950) 100%);
+	margin: 50% auto 0;
 	max-width: 100%;
+	border-radius: 0.75rem;
 	transition: max-width 0.32s ease;
 }
 
 .title__poster {
+	background-color: var(--gray-850);
 	flex: 1;
-	height: 0;
-	padding-bottom: 100%;
-	border-radius: 0.75rem 0.75rem 0 0;
-	position: relative;
-	display: block;
+	margin: -50% auto 0;
+	width: calc(100% - 3rem);
+	max-width: 18.75rem;
+	border-radius: 0.75rem;
 	overflow: hidden;
-}
-
-.title__poster-image {
-	object-fit: cover;
-	position: absolute;
-	width: 100%;
-	height: 100%;
+	transition: width 0.32s ease;
 }
 
 .title__content {
 	flex: 1;
-	display: flex;
-	flex-direction: column;
 	color: var(--gray-300);
-	background: linear-gradient(160deg, var(--gray-850) 0%, var(--gray-950) 100%);
-	padding: 1rem;
+	padding: 1.5rem;
 	border-radius: 0 0 0.75rem 0.75rem;
 	transition: padding 0.32s ease;
-}
-
-.title__header {
-	display: flex;
-	justify-content: space-between;
-}
-
-.title__header-column + .title__header-column {
-	margin-left: 1rem;
 }
 
 .title__title {
@@ -188,14 +172,7 @@ export default {
 }
 
 .title__rating {
-	margin-top: 0.5rem;
-	margin-left: 1rem;
-	white-space: nowrap;
-}
-
-.title__rating i {
-	color: var(--color-main);
-	margin-right: 0.325rem;
+	margin-left: auto;
 }
 
 .title__body {
@@ -212,8 +189,8 @@ export default {
 	align-items: center;
 }
 
-.title__meta span + span {
-	margin-left: 1rem;
+.title__meta span:nth-child(2) {
+	margin: 0 1rem;
 }
 
 .title__plot {
@@ -257,35 +234,35 @@ export default {
 
 @media screen and (min-width: 30em) {
 	.title__content {
-		padding: 1rem 1.5rem 1.5rem;
+		padding: 2rem;
 	}
 }
 
 @media screen and (min-width: 38.75em) {
 	.title__overview {
 		flex-direction: row;
+		align-items: flex-start;
+		margin-top: 2rem;
 	}
 
 	.title__poster {
-		flex: 0 1 40%;
-		height: auto;
-		padding-bottom: 0;
-		border-radius: 0.75rem 0 0 0.75rem;
+		flex: 1;
+		margin: -2rem 0 1.5rem 1.5rem;
 	}
 
 	.title__content {
+		flex: 1;
 		border-radius: 0 0.75rem 0.75rem 0;
 	}
 }
 
 @media screen and (min-width: 53.75em) {
-	.title__overview {
-		max-width: 80%;
+	.title__poster {
+		flex: 0 1 40%;
 	}
 
-	.title__poster {
-		flex: 0 1 300px;
-		min-height: 28rem;
+	.title__overview {
+		max-width: 80%;
 	}
 }
 </style>
