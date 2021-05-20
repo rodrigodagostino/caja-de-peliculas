@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import TheHeader from './layout/TheHeader.vue'
-import TheMain from './layout/TheMain.vue'
-import TheFooter from './layout/TheFooter.vue'
+import TheHeader from './layouts/TheHeader.vue'
+import TheMain from './layouts/TheMain.vue'
+import TheFooter from './layouts/TheFooter.vue'
 
 export default {
 	components: {
