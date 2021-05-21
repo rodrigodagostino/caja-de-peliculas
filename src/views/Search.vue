@@ -6,7 +6,7 @@
 				<SearchResult v-for="result in searchResults" :result="result" :key="result.imdbID" />
 			</ul>
 			<p v-else-if="!isFetching && isTitleNotFound" class="search-not-found">
-				No se han encontrado resultados para <strong>“{{ $route.query.q }}”</strong>.
+				No se encontraron resultados para <strong>“{{ $route.query.q }}”</strong>.
 			</p>
 		</transition>
 	</section>

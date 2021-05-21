@@ -7,17 +7,17 @@
 					<span>Caja de Películas</span>
 				</router-link>
 			</h1>
-			<SearchBox />
+			<SearchForm />
 		</div>
 	</header>
 </template>
 
 <script>
-import SearchBox from '@/components/SearchBox.vue'
+import SearchForm from '@/components/SearchForm.vue'
 
 export default {
 	components: {
-		SearchBox,
+		SearchForm,
 	},
 }
 </script>
