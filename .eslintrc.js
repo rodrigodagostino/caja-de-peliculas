@@ -60,9 +60,11 @@ module.exports = {
 		'space-unary-ops': [
 			'error',
 			{
-				overrides: {
-					'!': true,
-				},
+				words: true,
+				nonwords: false,
+				// overrides: {
+				// 	'!': true,
+				// },
 			},
 		],
 		'template-curly-spacing': [ 'error', 'always' ],

@@ -1,5 +1,5 @@
 {
-  "name": "caja-de-peliculas",
+  "name": "vue-movie-search-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -26,6 +26,6 @@
     "eslint-plugin-vue": "^7.12.1",
     "prettier": "^2.3.2",
     "sass": "^1.35.1",
-    "sass-loader": "^12.1.0"
+    "sass-loader": "^8.0.2"
   }
 }
