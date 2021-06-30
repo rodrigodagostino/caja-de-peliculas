@@ -5,12 +5,12 @@
 				type="text"
 				class="search-box__input"
 				v-model="searchValue"
-				placeholder="Escribe el título…"
+				placeholder="Type in the title…"
 				required
 			/>
 			<button type="submit" class="search-box__button">
 				<i class="fas fa-search"></i>
-				<span class="screen-reader-text">Buscar</span>
+				<span class="screen-reader-text">Search</span>
 			</button>
 		</div>
 	</form>

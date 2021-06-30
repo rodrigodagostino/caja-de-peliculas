@@ -11,19 +11,19 @@ const routes = [
 		path: '/search',
 		name: 'Search',
 		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
+		// this generates a separate chunk (search.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
 		component: () =>
-			import( /* webpackChunkName: "about" */ '../views/Search.vue' ),
+			import( /* webpackChunkName: "search" */ '../views/Search.vue' ),
 	},
 	{
 		path: '/title/:id',
 		name: 'Title',
 		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
+		// this generates a separate chunk (title.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
 		component: () =>
-			import( /* webpackChunkName: "about" */ '../views/Title.vue' ),
+			import( /* webpackChunkName: "title" */ '../views/Title.vue' ),
 	},
 	{ path: '/title', redirect: { name: 'Home' } },
 ]

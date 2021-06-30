@@ -3,8 +3,8 @@
 		<div class="container">
 			<h1 class="site-title">
 				<router-link to="./">
-					<i class="fas fa-film"></i>
-					<span>Caja de Películas</span>
+					<i class="fas fa-film" />
+					<span>Movie Search App</span>
 				</router-link>
 			</h1>
 			<SearchForm />

@@ -1,24 +1,27 @@
 <template>
-	<div class="modal-container">
-		<div class="modal">
-			<header class="modal-header">
-				<h3 class="modal-title"><slot name="title"></slot></h3>
-				<BaseButton
-					type="button"
-					variation="text-neutral"
-					icon-class="fas fa-times"
-					span-class="screen-reader-text"
-					@click="$emit('close-modal')"
-				>
-					<template #default>Cerrar ventana modal</template>
-				</BaseButton>
-			</header>
-			<div class="modal-content">
-				<slot></slot>
+	<transition name="fade" appear>
+		<div class="modal-container">
+			<div class="modal">
+				<header class="modal-header">
+					<h3 class="modal-title">
+						<slot name="title" />
+					</h3>
+					<BaseButton
+						variation="text-neutral"
+						icon-classes="fas fa-times"
+						text-classes="screen-reader-text"
+						@click="$emit('close-modal')"
+					>
+						<template #default>Close modal window</template>
+					</BaseButton>
+				</header>
+				<div class="modal-content">
+					<slot />
+				</div>
 			</div>
+			<div class="backdrop" @click="$emit('close-modal')"></div>
 		</div>
-		<div class="backdrop" @click="$emit('close-modal')"></div>
-	</div>
+	</transition>
 </template>
 
 <script>

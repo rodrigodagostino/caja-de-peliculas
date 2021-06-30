@@ -3,22 +3,14 @@
 		:is="tag"
 		:href="href"
 		:target="target"
-		:type="type"
+		:type="computedType"
 		class="button"
-		:class="{
-			'button--fill-main': variation === 'fill-main',
-			'button--fill-neutral': variation === 'fill-neutral',
-			'button--outline-main': variation === 'outline-main',
-			'button--outline-neutral': variation === 'outline-neutral',
-			'button--text-main': variation === 'text-main',
-			'button--text-neutral': variation === 'text-neutral',
-			'button--small': size === 'small',
-			'button--medium': size === 'medium',
-			'button--large': size === 'large',
-		}"
+		:class="buttonClasses"
 	>
-		<i v-if="iconClass" :class="iconClass"></i>
-		<span v-if="$slots.default" :class="spanClass"><slot></slot></span>
+		<i v-if="iconClasses" :class="iconClasses" />
+		<span v-if="$slots.default" :class="textClasses">
+			<slot />
+		</span>
 	</component>
 </template>
 
@@ -50,12 +42,12 @@ export default {
 			required: false,
 			default: null,
 		},
-		iconClass: {
+		iconClasses: {
 			type: String,
 			required: false,
 			default: null,
 		},
-		spanClass: {
+		textClasses: {
 			type: String,
 			required: false,
 			default: null,
@@ -67,6 +59,25 @@ export default {
 				return 'a'
 			}
 			return 'button'
+		},
+		computedType() {
+			if ( !this.type && !this.href ) {
+				return 'button'
+			}
+			return null
+		},
+		buttonClasses() {
+			return {
+				'button--fill-main': this.variation === 'fill-main',
+				'button--fill-neutral': this.variation === 'fill-neutral',
+				'button--outline-main': this.variation === 'outline-main',
+				'button--outline-neutral': this.variation === 'outline-neutral',
+				'button--text-main': this.variation === 'text-main',
+				'button--text-neutral': this.variation === 'text-neutral',
+				'button--small': this.size === 'small',
+				'button--medium': this.size === 'medium',
+				'button--large': this.size === 'large',
+			}
 		},
 	},
 }

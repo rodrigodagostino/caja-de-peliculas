@@ -1,7 +1,9 @@
 <template>
 	<li class="search-result">
 		<router-link :to="`/title/${result.imdbID}`" class="search-result__link">
-			<span class="search-result__link-text">Ir a información detallada de {{ result.Title }}"</span>
+			<span class="search-result__link-text">
+				See detailed information for “{{ result.Title }}”
+			</span>
 			<picture class="search-result__poster">
 				<img :src="result.Poster" class="search-result__poster-image" :alt="result.Title" />
 			</picture>
@@ -24,7 +26,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .search-result {
 	width: 100%;
 	max-width: 17.5rem;
@@ -37,16 +39,38 @@ export default {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	transition: background-color 0.32s ease, transform 0.32s ease, box-shadow 0.32s ease;
+	transition: background-color 0.32s ease, outline 0.32s ease, transform 0.32s ease,
+		box-shadow 0.32s ease;
 	will-change: transform;
 	text-decoration: none;
-}
+	outline: 2px solid transparent;
 
-.search-result__link:focus,
-.search-result__link:hover {
-	background: var(--gray-750);
-	box-shadow: 0 0.5rem 2rem hsla(240, 11%, 4%, 0.8);
-	transform: translate3d(0, -1rem, 0);
+	&::before {
+		content: '';
+		background: linear-gradient(160deg, transparent 0%, var(--gray-950) 100%);
+		border-radius: 0.75rem;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	&:focus,
+	&:hover {
+		background: var(--gray-750);
+		box-shadow: 0 0.5rem 2rem hsla(240, 11%, 4%, 0.8);
+		transform: translate3d(0, -1rem, 0);
+
+		.search-result__poster-image {
+			transform: scale(1.1) rotate(4deg);
+			transition: transform 0.32s ease;
+		}
+	}
+
+	&:focus {
+		box-shadow: 0 0 0 0.125rem var(--color-main), 0 0.5rem 2rem hsla(240, 11%, 4%, 0.8);
+	}
 }
 
 .search-result__link-text {
@@ -56,24 +80,18 @@ export default {
 
 .search-result__poster {
 	display: block;
-	width: calc(100% - 3rem);
+	width: calc(100% - 2.5rem);
 	min-height: 12.5rem;
 	margin: -50% auto 0;
 	border-radius: 0.75rem;
 	transition: padding 0.32s ease;
 	overflow: hidden;
 	position: relative;
-}
 
-.search-result__poster-image {
-	transform: scale(1) rotate(0deg);
-	transition: transform 0.32s ease;
-}
-
-.search-result__link:focus .search-result__poster-image,
-.search-result__link:hover .search-result__poster-image {
-	transform: scale(1.1) rotate(4deg);
-	transition: transform 0.32s ease;
+	&-image {
+		transform: scale(1) rotate(0deg);
+		transition: transform 0.32s ease;
+	}
 }
 
 .search-result__info {

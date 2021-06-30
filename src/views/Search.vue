@@ -1,12 +1,21 @@
 <template>
 	<section class="content">
-		<transition name="slide-fade" leave-active-class="fade-leave-active" mode="out-in" type="animation">
+		<transition
+			name="slide-fade"
+			leave-active-class="fade-leave-active"
+			mode="out-in"
+			type="animation"
+		>
 			<BaseSpinner v-if="isFetching" size="medium" />
 			<ul v-else-if="!isFetching && searchResults?.length" class="search-results">
-				<SearchResult v-for="result in searchResults" :result="result" :key="result.imdbID" />
+				<SearchResult
+					v-for="result in searchResults"
+					:result="result"
+					:key="result.imdbID"
+				/>
 			</ul>
 			<p v-else-if="!isFetching && isTitleNotFound" class="search-not-found">
-				No se encontraron resultados para <strong>“{{ $route.query.q }}”</strong>.
+				No results were found for <strong>“{{ $route.query.q }}”</strong>.
 			</p>
 		</transition>
 	</section>
@@ -93,13 +102,13 @@ export default {
 
 @media screen and (min-width: 42.5em) {
 	.search-results {
-		grid-template-columns: repeat(3, minmax(0,1fr));
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 }
 
 @media screen and (min-width: 56em) {
 	.search-results {
-		grid-template-columns: repeat(4, minmax(0,1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 }
 </style>

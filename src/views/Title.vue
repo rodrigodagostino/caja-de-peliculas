@@ -1,10 +1,22 @@
 <template>
 	<section class="content">
-		<transition name="slide-fade" leave-active-class="fade-leave-active" mode="out-in" type="animation">
+		<transition
+			name="slide-fade"
+			leave-active-class="fade-leave-active"
+			mode="out-in"
+			type="animation"
+		>
 			<BaseSpinner v-if="isFetching" size="medium" />
-			<div v-else-if="!isFetching && movieData.hasOwnProperty('Title')" class="title__overview">
+			<div
+				v-else-if="!isFetching && movieData.hasOwnProperty('Title')"
+				class="title__overview"
+			>
 				<picture class="title__poster">
-					<img :src="movieData.Poster" class="title__poster-image" :alt="movieData.Title" />
+					<img
+						:src="movieData.Poster"
+						class="title__poster-image"
+						:alt="movieData.Title"
+					/>
 				</picture>
 				<div class="title__content">
 					<header class="title__header">
@@ -18,43 +30,55 @@
 						<aside class="title__meta">
 							<span class="title__runtime">{{ movieData.Runtime }}</span>
 							<span class="title__genre">{{ movieData.Genre }}</span>
-							<RatingRing class="title__rating" :radius="20" :progress="+movieData.imdbRating" :stroke="4" />
+							<RatingRing
+								class="title__rating"
+								:radius="20"
+								:progress="+movieData.imdbRating"
+								:stroke="4"
+							/>
 						</aside>
 						<p class="title__plot">{{ movieData.Plot }}</p>
 						<p class="title__cast">{{ movieData.Actors }}</p>
 					</section>
 					<footer class="title__footer">
-						<BaseButton type="button" icon-class="fas fa-play" @click="openTrailerModal">
-							<template #default>Ver avance</template>
+						<BaseButton icon-classes="fas fa-play" @click="openTrailerModal">
+							<template #default>Watch trailer</template>
 						</BaseButton>
-						<BaseButton href="#" variation="text-neutral" icon-class="fas fa-share-alt" />
+						<BaseButton
+							href="#"
+							variation="text-neutral"
+							text-classes="screen-reader-text"
+							icon-classes="fas fa-share-alt"
+							@click="copyTitleUrl"
+						>
+							<template #default>Copy this URL</template>
+						</BaseButton>
+						<input class="title__url-input" id="url-input" :value="urlInputValue" />
 					</footer>
 				</div>
 			</div>
 		</transition>
 		<teleport to="body">
-			<transition name="fade" appear>
-				<BaseModal
-					v-if="isTrailerModalVisible && youTubeVideoData.hasOwnProperty('id')"
-					@close-modal="closeTrailerModal"
-				>
-					<template #title>{{ movieData.Title }}</template>
-					<template #default>
-						<div class="title__trailer-container">
-							<iframe
-								class="title__trailer"
-								width="560"
-								height="315"
-								:src="`https://www.youtube-nocookie.com/embed/${youTubeVideoData.id.videoId}`"
-								title="YouTube video player"
-								frameborder="0"
-								allow="autoplay; encrypted-media; picture-in-picture"
-								allowfullscreen
-							></iframe>
-						</div>
-					</template>
-				</BaseModal>
-			</transition>
+			<BaseModal
+				v-if="isTrailerModalVisible && youTubeVideoData.hasOwnProperty('id')"
+				@close-modal="closeTrailerModal"
+			>
+				<template #title>{{ movieData.Title }}</template>
+				<template #default>
+					<div class="title__trailer-container">
+						<iframe
+							class="title__trailer"
+							width="560"
+							height="315"
+							:src="`https://www.youtube-nocookie.com/embed/${youTubeVideoData.id.videoId}`"
+							title="YouTube video player"
+							frameborder="0"
+							allow="autoplay; encrypted-media; picture-in-picture"
+							allowfullscreen
+						></iframe>
+					</div>
+				</template>
+			</BaseModal>
 		</teleport>
 	</section>
 </template>
@@ -80,6 +104,11 @@ export default {
 			isFetching: true,
 			isTrailerModalVisible: false,
 		}
+	},
+	computed: {
+		urlInputValue() {
+			return window.location.href
+		},
 	},
 	watch: {
 		movieData() {
@@ -111,7 +140,10 @@ export default {
 			if ( this.movieData.Title ) {
 				const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY
 				const q = encodeURI(
-					this.movieData.Title.replace( '&', 'and' ) + ' ' + this.movieData.Year + ' trailer'.toLowerCase(),
+					this.movieData.Title.replace( '&', 'and' ) +
+						' ' +
+						this.movieData.Year +
+						' trailer'.toLowerCase(),
 				)
 				const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
 				fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )
@@ -120,6 +152,10 @@ export default {
 					.catch( error => console.error( error ) )
 			}
 		},
+		copyTitleUrl() {
+			document.getElementById( 'url-input' ).select()
+			document.execCommand( 'copy' )
+		},
 	},
 	created() {
 		this.fetchMovieData( this.$route.params.id )
@@ -127,7 +163,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .title__overview {
 	display: flex;
 	flex-direction: column;
@@ -177,20 +213,20 @@ export default {
 
 .title__body {
 	margin-top: 2rem;
-}
 
-.title__body > * + * {
-	margin-top: 1rem;
+	& > * + * {
+		margin-top: 1rem;
+	}
 }
 
 .title__meta {
 	font-size: 0.875rem;
 	display: flex;
 	align-items: center;
-}
 
-.title__meta span:nth-child(2) {
-	margin: 0 1rem;
+	span:nth-child(2) {
+		margin: 0 1rem;
+	}
 }
 
 .title__plot {
@@ -230,6 +266,10 @@ export default {
 	right: 0;
 	width: 100%;
 	height: 100%;
+}
+
+.title__url-input {
+	display: none;
 }
 
 @media screen and (min-width: 30em) {
