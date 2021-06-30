@@ -2,7 +2,7 @@ module.exports = {
 	chainWebpack: config => {
 		// Define a human-friendly title for the app.
 		config.plugin( 'html' ).tap( args => {
-			args[ 0 ].title = 'Caja de Películas'
+			args[ 0 ].title = 'Vue Movie Search App'
 			return args
 		} )
 
