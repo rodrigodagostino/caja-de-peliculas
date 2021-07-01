@@ -1,7 +1,7 @@
 # Vue Movie Search App
 
 ## Live demo
-Deployed with [Netlify](https://v-movie-search-app.netlify.app/).
+Deployed with [Netlify](https://v-movie-search-app.netlify.app/){:target="_blank"}.
 
 
 ## Project setup
