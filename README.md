@@ -1,4 +1,8 @@
-# Caja de Películas
+# Vue Movie Search App
+
+## Live demo
+Deployed with [Netlify](https://v-movie-search-app.netlify.app/).
+
 
 ## Project setup
 ```
