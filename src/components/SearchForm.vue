@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="submitForm" class="search-form">
+	<form @submit.prevent="submitForm" class="search-form" :style="formStyles">
 		<div class="search-box">
 			<input
 				type="text"
@@ -24,6 +24,14 @@ export default {
 			searchValue: this.$route.query.q ? this.$route.query.q : '',
 		}
 	},
+	computed: {
+		formStyles() {
+			if ( this.$route.fullPath === '/' ) {
+				return { 'margin-top': '24vh' }
+			}
+			return { 'margin-top': '2rem' }
+		},
+	},
 	methods: {
 		submitForm() {
 			this.$router.push( `/search?q=${ this.searchValue }` )
@@ -35,7 +43,7 @@ export default {
 <style scoped>
 .search-form {
 	width: 100%;
-	margin-top: 2rem;
+	transition: margin 0.32s ease;
 }
 
 .search-box {
