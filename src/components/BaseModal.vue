@@ -19,7 +19,7 @@
 					<slot />
 				</div>
 			</div>
-			<div class="backdrop" @click="$emit('close-modal')"></div>
+			<div class="backdrop" @click="$emit('close-modal')" />
 		</div>
 	</transition>
 </template>
@@ -28,10 +28,10 @@
 import BaseButton from '@/components/BaseButton.vue'
 
 export default {
+	emits: [ 'close-modal' ],
 	components: {
 		BaseButton,
 	},
-	emits: [ 'close-modal' ],
 }
 </script>
 
