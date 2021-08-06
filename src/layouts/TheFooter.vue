@@ -10,11 +10,15 @@
 
 <style>
 .site-footer {
-	background-color: var(--gray-950);
 	font-size: 0.875rem;
 	text-align: center;
-	padding: 0.5rem 0;
 	margin-top: auto;
+}
+
+.site-footer .container {
+	display: flex;
+	justify-content: center;
+	padding: 1rem 0;
 }
 
 .site-footer a {
@@ -34,11 +38,5 @@
 	vertical-align: middle;
 	margin: 0 0.25rem;
 	display: inline-block;
-}
-
-.site-footer .container {
-	display: flex;
-	justify-content: center;
-	padding: 1rem 0;
 }
 </style>
