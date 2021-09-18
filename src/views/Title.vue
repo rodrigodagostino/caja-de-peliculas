@@ -119,7 +119,7 @@ export default {
 		fetchMovieData( id ) {
 			this.isFetching = true
 			this.movieData = {}
-			const apiKey = process.env.VUE_APP_OMDB_API_KEY
+			const apiKey = import.meta.env.VITE_OMDB_API_KEY
 			const apiUrl = 'https://www.omdbapi.com'
 			fetch( `${ apiUrl }/?apikey=${ apiKey }&i=${ id }` )
 				.then( response => response.json() )
@@ -138,7 +138,7 @@ export default {
 		fetchYouTubeVideoData() {
 			this.youTubeVideoData = {}
 			if ( this.movieData.Title ) {
-				const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY
+				const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
 				const q = encodeURI(
 					this.movieData.Title.replace( '&', 'and' ) +
 						' ' +
