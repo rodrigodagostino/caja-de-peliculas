@@ -5,7 +5,8 @@
 				See detailed information for “{{ result.Title }}”
 			</span>
 			<picture class="search-result__poster">
-				<img :src="result.Poster" class="search-result__poster-image" :alt="result.Title" />
+				<img v-if="result.Poster !== 'N/A'" :src="result.Poster" class="search-result__poster-image" :alt="result.Title" />
+				<img v-else src="@/assets/placeholder-image.svg" class="search-result__poster-image" alt="Placeholder for the missing poster" />
 			</picture>
 			<div class="search-result__info">
 				<h3 class="search-result__title">{{ result.Title }}</h3>

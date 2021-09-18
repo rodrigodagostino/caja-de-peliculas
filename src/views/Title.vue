@@ -1,21 +1,20 @@
 <template>
 	<section class="content">
-		<transition
-			name="slide-fade"
-			leave-active-class="fade-leave-active"
-			mode="out-in"
-			type="animation"
-		>
+		<transition name="slide-fade" leave-active-class="fade-leave-active" mode="out-in" type="animation">
 			<BaseSpinner v-if="isFetching" size="medium" />
-			<div
-				v-else-if="!isFetching && movieData.hasOwnProperty('Title')"
-				class="title__overview"
-			>
+			<div v-else-if="!isFetching && movieData.hasOwnProperty('Title')" class="title__overview">
 				<picture class="title__poster">
 					<img
+						v-if="movieData.Poster !== 'N/A'"
 						:src="movieData.Poster"
 						class="title__poster-image"
 						:alt="movieData.Title"
+					/>
+					<img
+						v-else
+						src="@/assets/placeholder-image.svg"
+						class="title__poster-image"
+						alt="Placeholder for the missing poster"
 					/>
 				</picture>
 				<div class="title__content">
@@ -140,10 +139,7 @@ export default {
 			if ( this.movieData.Title ) {
 				const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
 				const q = encodeURI(
-					this.movieData.Title.replace( '&', 'and' ) +
-						' ' +
-						this.movieData.Year +
-						' trailer'.toLowerCase(),
+					this.movieData.Title.replace( '&', 'and' ) + ' ' + this.movieData.Year + ' trailer'.toLowerCase(),
 				)
 				const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
 				fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )

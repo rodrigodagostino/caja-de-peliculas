@@ -4,7 +4,7 @@
 Deployed with [Netlify](https://v-movie-search-app.netlify.app/).
 
 ## Potential future features
-- Display placeholder image when search results do not carry their own.
+- ~~Display placeholder image when search results do not carry their own.~~
 - Copy sharable link for a single result.
 
 ## Project setup
