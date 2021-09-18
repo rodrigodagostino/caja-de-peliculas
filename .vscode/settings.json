@@ -18,6 +18,4 @@
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"vetur.format.defaultFormatter.js": "prettier-eslint",
-	"vetur.format.options.tabSize": 4,
 }
