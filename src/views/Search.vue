@@ -65,8 +65,8 @@ export default {
 		},
 	},
 	created() {
-		if (!this.$route.query.q) {
-			this.$router.push('/')
+		if ( !this.$route.query.q ) {
+			this.$router.push( '/' )
 			return
 		}
 		this.fetchMoviesData( this.$route.query.q )
