@@ -16,27 +16,19 @@
 	</form>
 </template>
 
-<script>
-export default {
-	name: 'SearchForm',
-	data() {
-		return {
-			searchValue: this.$route.query.q ? this.$route.query.q : '',
-		}
-	},
-	computed: {
-		formStyles() {
-			if ( this.$route.fullPath === '/' ) {
-				return { 'margin-top': '24vh' }
-			}
-			return { 'margin-top': '2rem' }
-		},
-	},
-	methods: {
-		submitForm() {
-			this.$router.push( `/search?q=${ this.searchValue }` )
-		},
-	},
+<script setup>
+import { ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
+
+const searchValue = ref( route.query.q ? route.query.q : '' )
+
+const formStyles = computed( () => route.fullPath === '/' ? { 'margin-top': '24vh' } : { 'margin-top': '2rem' } )
+
+const submitForm = () => {
+	router.push( `/search?q=${ searchValue.value }` )
 }
 </script>
 

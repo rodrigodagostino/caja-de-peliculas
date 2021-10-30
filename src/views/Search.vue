@@ -1,18 +1,9 @@
 <template>
 	<section class="content">
-		<transition
-			name="slide-fade"
-			leave-active-class="fade-leave-active"
-			mode="out-in"
-			type="animation"
-		>
+		<transition name="slide-fade" leave-active-class="fade-leave-active" mode="out-in" type="animation">
 			<BaseSpinner v-if="isFetching" size="medium" />
 			<ul v-else-if="!isFetching && searchResults?.length" class="search-results">
-				<SearchResult
-					v-for="result in searchResults"
-					:result="result"
-					:key="result.imdbID"
-				/>
+				<SearchResult v-for="result in searchResults" :result="result" :key="result.imdbID" />
 			</ul>
 			<p v-else-if="!isFetching && isTitleNotFound" class="search-not-found">
 				No results were found for <strong>“{{ $route.query.q }}”</strong>.
@@ -21,57 +12,47 @@
 	</section>
 </template>
 
-<script>
-// @ is an alias to /src
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import BaseSpinner from '@/components/BaseSpinner.vue'
 import SearchResult from '@/components/SearchResult.vue'
 
-export default {
-	name: 'Search',
-	components: {
-		BaseSpinner,
-		SearchResult,
-	},
-	data() {
-		return {
-			searchResults: [],
-			isFetching: false,
-			isTitleNotFound: false,
-		}
-	},
-	watch: {
-		$route( to ) {
-			this.fetchMoviesData( to.query.q )
-		},
-	},
-	methods: {
-		fetchMoviesData( searchTerm ) {
-			this.isTitleNotFound = false
-			this.isFetching = true
-			this.searchResults = []
-			const apiKey = import.meta.env.VITE_OMDB_API_KEY
-			const apiUrl = 'https://www.omdbapi.com'
-			fetch( `${ apiUrl }/?apikey=${ apiKey }&s=${ searchTerm }` )
-				.then( response => response.json() )
-				.then( data => {
-					if ( data.Error === 'Movie not found!' ) {
-						this.isTitleNotFound = true
-					} else {
-						this.searchResults = data.Search
-					}
-					this.isFetching = false
-				} )
-				.catch( error => console.error( error ) )
-		},
-	},
-	created() {
-		if ( !this.$route.query.q ) {
-			this.$router.push( '/' )
-			return
-		}
-		this.fetchMoviesData( this.$route.query.q )
-	},
+const router = useRouter()
+const route = useRoute()
+
+const searchResults = ref( [] )
+const isFetching = ref( false )
+const isTitleNotFound = ref( false )
+
+const fetchMoviesData = searchTerm => {
+	isTitleNotFound.value = false
+	isFetching.value = true
+	searchResults.value = []
+
+	const apiKey = import.meta.env.VITE_OMDB_API_KEY
+	const apiUrl = 'https://www.omdbapi.com'
+
+	fetch( `${ apiUrl }/?apikey=${ apiKey }&s=${ searchTerm }` )
+		.then( response => response.json() )
+		.then( data => {
+			if ( data.Error === 'Movie not found!' ) {
+				isTitleNotFound.value = true
+			} else {
+				searchResults.value = data.Search
+			}
+			isFetching.value = false
+		} )
+		.catch( error => console.error( error ) )
 }
+
+onMounted( () => !route.query.q ? router.push( '/' ) : fetchMoviesData( route.query.q ) )
+
+onBeforeRouteUpdate( ( to, from ) => {
+	if ( to.query.q !== from.query.q ) {
+		fetchMoviesData( to.query.q )
+	}
+} )
 </script>
 
 <style scoped>

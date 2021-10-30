@@ -4,18 +4,10 @@
 	<TheFooter />
 </template>
 
-<script>
+<script setup>
 import TheHeader from '@/layouts/TheHeader.vue'
 import TheMain from '@/layouts/TheMain.vue'
 import TheFooter from '@/layouts/TheFooter.vue'
-
-export default {
-	components: {
-		TheHeader,
-		TheMain,
-		TheFooter,
-	},
-}
 </script>
 
 <style>

@@ -12,14 +12,8 @@
 	</header>
 </template>
 
-<script>
+<script setup>
 import SearchForm from '@/components/SearchForm.vue'
-
-export default {
-	components: {
-		SearchForm,
-	},
-}
 </script>
 
 <style scoped>

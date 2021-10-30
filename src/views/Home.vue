@@ -17,20 +17,6 @@
 	</section>
 </template>
 
-<script>
-export default {
-	name: 'Home',
-	data() {
-		return {
-			searchResults: [],
-			isFetching: false,
-			isMovieNotFound: false,
-			selectedMovieId: null,
-		}
-	},
-}
-</script>
-
 <style scoped>
 .welcome-section__arrow {
 	width: 6rem;

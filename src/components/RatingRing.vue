@@ -15,7 +15,7 @@
 				class="progress-ring__circle"
 				stroke="var(--color-main)"
 				fill="transparent"
-				:stroke-dasharray="circumference + ' ' + circumference"
+				:stroke-dasharray="circumference"
 				:style="{ strokeDashoffset }"
 				:stroke-width="stroke"
 				:r="normalizedRadius"
@@ -27,37 +27,27 @@
 	</div>
 </template>
 
-<script>
-export default {
-	props: {
-		radius: {
-			type: Number,
-			required: true,
-		},
-		progress: {
-			type: Number,
-			required: true,
-		},
-		stroke: {
-			type: Number,
-			required: true,
-		},
-	},
-	data() {
-		const normalizedRadius = this.radius - this.stroke / 2
-		const circumference = normalizedRadius * 2 * Math.PI
+<script setup>
+import { computed } from 'vue'
 
-		return {
-			normalizedRadius,
-			circumference,
-		}
+const props = defineProps( {
+	radius: {
+		type: Number,
+		required: true,
 	},
-	computed: {
-		strokeDashoffset() {
-			return this.circumference - this.progress / 10 * this.circumference
-		},
+	progress: {
+		type: Number,
+		required: true,
 	},
-}
+	stroke: {
+		type: Number,
+		required: true,
+	},
+} )
+
+const normalizedRadius = computed( () => props.radius - props.stroke / 2 )
+const circumference = computed( () => normalizedRadius.value * 2 * Math.PI )
+const strokeDashoffset = computed( () => circumference.value - props.progress / 10 * circumference.value )
 </script>
 
 <style scoped>

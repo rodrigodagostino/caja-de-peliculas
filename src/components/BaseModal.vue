@@ -10,7 +10,7 @@
 						variation="text-neutral"
 						icon-classes="fas fa-times"
 						text-classes="screen-reader-text"
-						@click="$emit('close-modal')"
+						@click="emit('close-modal')"
 					>
 						<template #default>Close modal window</template>
 					</BaseButton>
@@ -19,20 +19,15 @@
 					<slot />
 				</div>
 			</div>
-			<div class="backdrop" @click="$emit('close-modal')" />
+			<div class="backdrop" @click="emit('close-modal')" />
 		</div>
 	</transition>
 </template>
 
-<script>
+<script setup>
 import BaseButton from '@/components/BaseButton.vue'
 
-export default {
-	emits: [ 'close-modal' ],
-	components: {
-		BaseButton,
-	},
-}
+const emit = defineEmits( [ 'close-modal' ] )
 </script>
 
 <style scoped>

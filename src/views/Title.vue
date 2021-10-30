@@ -62,7 +62,7 @@
 				v-if="isTrailerModalVisible && youTubeVideoData.hasOwnProperty('id')"
 				@close-modal="closeTrailerModal"
 			>
-				<template #title>{{ movieData.Title }}</template>
+				<template #title>{{ `${movieData.Title} (${movieData.Year})` }}</template>
 				<template #default>
 					<div class="title__trailer-container">
 						<iframe
@@ -82,81 +82,68 @@
 	</section>
 </template>
 
-<script>
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseModal from '@/components/BaseModal.vue'
 import RatingRing from '@/components/RatingRing.vue'
 import BaseSpinner from '@/components/BaseSpinner.vue'
 
-export default {
-	name: 'Title',
-	components: {
-		BaseButton,
-		BaseModal,
-		RatingRing,
-		BaseSpinner,
-	},
-	data() {
-		return {
-			movieData: {},
-			youTubeVideoData: {},
-			isFetching: true,
-			isTrailerModalVisible: false,
-		}
-	},
-	computed: {
-		urlInputValue() {
-			return window.location.href
-		},
-	},
-	watch: {
-		movieData() {
-			this.fetchYouTubeVideoData()
-		},
-	},
-	methods: {
-		fetchMovieData( id ) {
-			this.isFetching = true
-			this.movieData = {}
-			const apiKey = import.meta.env.VITE_OMDB_API_KEY
-			const apiUrl = 'https://www.omdbapi.com'
-			fetch( `${ apiUrl }/?apikey=${ apiKey }&i=${ id }` )
-				.then( response => response.json() )
-				.then( data => {
-					this.movieData = data
-					this.isFetching = false
-				} )
-				.catch( error => console.error( error ) )
-		},
-		openTrailerModal() {
-			this.isTrailerModalVisible = true
-		},
-		closeTrailerModal() {
-			this.isTrailerModalVisible = false
-		},
-		fetchYouTubeVideoData() {
-			this.youTubeVideoData = {}
-			if ( this.movieData.Title ) {
-				const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
-				const q = encodeURI(
-					this.movieData.Title.replace( '&', 'and' ) + ' ' + this.movieData.Year + ' trailer'.toLowerCase(),
-				)
-				const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
-				fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )
-					.then( response => response.json() )
-					.then( data => this.youTubeVideoData = data.items[ 0 ] )
-					.catch( error => console.error( error ) )
-			}
-		},
-		copyTitleUrl() {
-			document.getElementById( 'url-input' ).select()
-			document.execCommand( 'copy' )
-		},
-	},
-	created() {
-		this.fetchMovieData( this.$route.params.id )
-	},
+const route = useRoute()
+
+const movieData = ref( {} )
+const youTubeVideoData = ref( {} )
+const isFetching = ref( true )
+const isTrailerModalVisible = ref( false )
+
+const urlInputValue = window.location.href
+
+watch( movieData, () => {
+	fetchYouTubeVideoData()
+} )
+
+const fetchMovieData = id => {
+	isFetching.value = true
+	movieData.value = {}
+	const apiKey = import.meta.env.VITE_OMDB_API_KEY
+	const apiUrl = 'https://www.omdbapi.com'
+	fetch( `${ apiUrl }/?apikey=${ apiKey }&i=${ id }` )
+		.then( response => response.json() )
+		.then( data => {
+			movieData.value = data
+			isFetching.value = false
+		} )
+		.catch( error => console.error( error ) )
 }
+
+const openTrailerModal = () => isTrailerModalVisible.value = true
+
+const closeTrailerModal = () => isTrailerModalVisible.value = false
+
+const fetchYouTubeVideoData = () => {
+	youTubeVideoData.value = {}
+	if ( movieData.value.Title ) {
+		const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
+		const q = encodeURI(
+			movieData.value.Title.replace( '&', 'and' ) + ' ' + movieData.value.Year + ' trailer'.toLowerCase(),
+		)
+		const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
+		fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )
+			.then( response => response.json() )
+			.then( data => youTubeVideoData.value = data.items[ 0 ] )
+			.catch( error => console.error( error ) )
+	}
+}
+
+const copyTitleUrl = () => {
+	document.getElementById( 'url-input' ).select()
+	document.execCommand( 'copy' )
+}
+
+onMounted( () => {
+	fetchMovieData( route.params.id )
+} )
 </script>
 
 <style scoped lang="scss">

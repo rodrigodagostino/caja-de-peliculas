@@ -16,15 +16,13 @@
 	</li>
 </template>
 
-<script>
-export default {
-	props: {
-		result: {
-			type: Object,
-			required: true,
-		},
+<script setup>
+defineProps( {
+	result: {
+		type: Object,
+		required: true,
 	},
-}
+} )
 </script>
 
 <style scoped lang="scss">
