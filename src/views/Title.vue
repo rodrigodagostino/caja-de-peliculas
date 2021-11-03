@@ -43,16 +43,18 @@
 						<BaseButton icon-classes="fas fa-play" @click="openTrailerModal">
 							<template #default>Watch trailer</template>
 						</BaseButton>
-						<BaseButton
-							href="#"
-							variation="text-neutral"
-							text-classes="screen-reader-text"
-							icon-classes="fas fa-share-alt"
-							@click="copyTitleUrl"
-						>
-							<template #default>Copy this URL</template>
-						</BaseButton>
-						<input class="title__url-input" id="url-input" :value="urlInputValue" />
+						<BaseTooltip text="Link copied" :isVisible="isCopyUrlTooltipVisible">
+							<BaseButton
+								href="#"
+								variation="text-neutral"
+								text-classes="screen-reader-text"
+								icon-classes="fas fa-share-alt"
+								@click="copyTitleUrl"
+							>
+								<template #default>Copy this URL</template>
+							</BaseButton>
+						</BaseTooltip>
+						<input class="title__url-input" ref="urlInput" :value="urlInputValue" />
 					</footer>
 				</div>
 			</div>
@@ -89,14 +91,17 @@ import BaseButton from '@/components/BaseButton.vue'
 import BaseModal from '@/components/BaseModal.vue'
 import RatingRing from '@/components/RatingRing.vue'
 import BaseSpinner from '@/components/BaseSpinner.vue'
+import BaseTooltip from '@/components/BaseTooltip.vue'
 
 const route = useRoute()
 
 const movieData = ref( {} )
 const youTubeVideoData = ref( {} )
 const isFetching = ref( true )
+const isCopyUrlTooltipVisible = ref( false )
 const isTrailerModalVisible = ref( false )
 
+const urlInput = ref( null )
 const urlInputValue = window.location.href
 
 watch( movieData, () => {
@@ -137,8 +142,11 @@ const fetchYouTubeVideoData = () => {
 }
 
 const copyTitleUrl = () => {
-	document.getElementById( 'url-input' ).select()
-	document.execCommand( 'copy' )
+	isCopyUrlTooltipVisible.value = true
+	navigator.clipboard.writeText( urlInput.value.value )
+	setTimeout( () => {
+		isCopyUrlTooltipVisible.value = false
+	}, 3000 )
 }
 
 onMounted( () => {
