@@ -1,12 +1,5 @@
 <template>
-	<component
-		:is="tag"
-		:href="href"
-		:target="target"
-		:type="computedType"
-		class="button"
-		:class="buttonClasses"
-	>
+	<component :is="tag" :href="href" :target="target" :type="computedType" class="button" :class="buttonClasses">
 		<i v-if="iconClasses" :class="iconClasses" />
 		<span v-if="$slots.default" :class="textClasses">
 			<slot />
@@ -163,19 +156,23 @@ const buttonClasses = {
 	color: var(--color-main--light);
 }
 
+.button--text-main:focus {
+	border: 2px solid var(--color-main--light);
+}
+
 .button--text-neutral {
 	color: var(--gray-400);
 	background-color: transparent;
 	border: 2px solid transparent;
 }
 
-.button--text-neutral:focus {
-	outline: 1px dotted white;
-}
-
 .button--text-neutral:focus,
 .button--text-neutral:hover {
 	color: var(--color-main);
+}
+
+.button--text-neutral:focus {
+	border: 2px solid var(--color-main);
 }
 
 .button--small {
