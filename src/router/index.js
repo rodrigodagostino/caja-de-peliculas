@@ -11,9 +11,9 @@ const routes = [
 	{ path: '/:pathMatch(.*)*', redirect: { name: 'Home' } },
 ]
 
-const router = createRouter( {
+const router = createRouter({
 	history: createWebHistory( import.meta.env.BASE_URL ),
 	routes,
-} )
+})
 
 export default router

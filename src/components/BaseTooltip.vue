@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-defineProps( {
+defineProps({
 	text: {
 		type: String,
 		required: true,
@@ -17,7 +17,7 @@ defineProps( {
 		type: Boolean,
 		required: true,
 	},
-} )
+})
 </script>
 
 <style lang="scss" scoped>

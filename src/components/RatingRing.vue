@@ -30,7 +30,7 @@
 <script setup>
 import { computed } from 'vue'
 
-const props = defineProps( {
+const props = defineProps({
 	radius: {
 		type: Number,
 		required: true,
@@ -43,7 +43,7 @@ const props = defineProps( {
 		type: Number,
 		required: true,
 	},
-} )
+})
 
 const normalizedRadius = computed( () => props.radius - props.stroke / 2 )
 const circumference = computed( () => normalizedRadius.value * 2 * Math.PI )

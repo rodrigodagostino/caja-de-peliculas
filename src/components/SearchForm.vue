@@ -25,7 +25,7 @@ const route = useRoute()
 
 const searchValue = ref( route.query.q ? route.query.q : '' )
 
-const formStyles = computed( () => route.fullPath === '/' ? { 'margin-top': '24vh' } : { 'margin-top': '2rem' } )
+const formStyles = computed( () => route.fullPath === '/' ? { 'margin-top': '24vh' } : { 'margin-top': '2rem' })
 
 const submitForm = () => {
 	router.push( `/search?q=${ searchValue.value }` )

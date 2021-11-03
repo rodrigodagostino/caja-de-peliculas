@@ -95,8 +95,8 @@ import BaseTooltip from '@/components/BaseTooltip.vue'
 
 const route = useRoute()
 
-const movieData = ref( {} )
-const youTubeVideoData = ref( {} )
+const movieData = ref({})
+const youTubeVideoData = ref({})
 const isFetching = ref( true )
 const isCopyUrlTooltipVisible = ref( false )
 const isTrailerModalVisible = ref( false )
@@ -106,7 +106,7 @@ const urlInputValue = window.location.href
 
 watch( movieData, () => {
 	fetchYouTubeVideoData()
-} )
+})
 
 const fetchMovieData = id => {
 	isFetching.value = true
@@ -118,7 +118,7 @@ const fetchMovieData = id => {
 		.then( data => {
 			movieData.value = data
 			isFetching.value = false
-		} )
+		})
 		.catch( error => console.error( error ) )
 }
 
@@ -151,7 +151,7 @@ const copyTitleUrl = () => {
 
 onMounted( () => {
 	fetchMovieData( route.params.id )
-} )
+})
 </script>
 
 <style scoped lang="scss">

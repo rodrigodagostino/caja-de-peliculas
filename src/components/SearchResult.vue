@@ -17,12 +17,12 @@
 </template>
 
 <script setup>
-defineProps( {
+defineProps({
 	result: {
 		type: Object,
 		required: true,
 	},
-} )
+})
 </script>
 
 <style scoped lang="scss">

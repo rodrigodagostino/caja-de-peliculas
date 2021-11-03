@@ -42,7 +42,7 @@ const fetchMoviesData = searchTerm => {
 				searchResults.value = data.Search
 			}
 			isFetching.value = false
-		} )
+		})
 		.catch( error => console.error( error ) )
 }
 
@@ -52,7 +52,7 @@ onBeforeRouteUpdate( ( to, from ) => {
 	if ( to.query.q !== from.query.q ) {
 		fetchMoviesData( to.query.q )
 	}
-} )
+})
 </script>
 
 <style scoped>
