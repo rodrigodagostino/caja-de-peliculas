@@ -10,7 +10,7 @@ Deployed with [Netlify](https://v-movie-search-app.netlify.app/).
 
 - ~~Display placeholder image when search results do not carry their own.~~
 - ~~Copy sharable link for a single result.~~
-- Progressive image loading to prevent content reflow.
+- ~~Prevent content reflow after images are loaded.~~
 
 ## Project setup
 

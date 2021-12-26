@@ -10,12 +10,16 @@
           :src="result.Poster"
           class="search-result__poster-image"
           :alt="result.Title"
+          width="300"
+          height="450"
         />
         <img
           v-else
           src="@/assets/placeholder-image.svg"
           class="search-result__poster-image"
           alt="Placeholder for the missing poster"
+          width="300"
+          height="450"
         />
       </picture>
       <div class="search-result__info">
@@ -91,14 +95,15 @@ defineProps({
 .search-result__poster {
   display: block;
   width: calc(100% - 2.5rem);
-  min-height: 12.5rem;
   margin: -50% auto 0;
   border-radius: 0.75rem;
-  transition: padding 0.32s ease;
   overflow: hidden;
   position: relative;
+  transition: padding 0.32s ease;
 
   &-image {
+    height: 150%;
+    object-fit: cover;
     transform: scale(1) rotate(0deg);
     transition: transform 0.32s ease;
   }

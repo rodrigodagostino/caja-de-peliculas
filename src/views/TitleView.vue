@@ -17,12 +17,16 @@
             :src="movieData.Poster"
             class="title__poster-image"
             :alt="movieData.Title"
+            width="300"
+            height="450"
           />
           <img
             v-else
             src="@/assets/placeholder-image.svg"
             class="title__poster-image"
             alt="Placeholder for the missing poster"
+            width="300"
+            height="450"
           />
         </picture>
         <div class="title__content">
@@ -186,14 +190,19 @@ onMounted( () => {
 }
 
 .title__poster {
-  background-color: var(--gray-850);
   flex: 1;
-  margin: -50% auto 0;
   width: calc(100% - 3rem);
   max-width: 18.75rem;
+  margin: -50% auto 0;
   border-radius: 0.75rem;
   overflow: hidden;
+  background-color: var(--gray-850);
   transition: width 0.32s ease;
+}
+
+.title__poster-image {
+  height: 150%;
+  object-fit: cover;
 }
 
 .title__content {
