@@ -50,9 +50,9 @@ const fetchMoviesData = searchTerm => {
     .then( data => {
       if ( data.Error === 'Movie not found!' ) {
         isTitleNotFound.value = true
-      } else {
-        searchResults.value = data.Search
+        return
       }
+      searchResults.value = data.Search
       isFetching.value = false
     })
     .catch( error => console.error( error ) )
