@@ -12,21 +12,10 @@ module.exports = {
   },
   rules: {
     'array-bracket-spacing': [ 'error', 'always' ],
-    'arrow-parens': [ 'error', 'as-needed' ],
-    'arrow-spacing': [
-      'error',
-      {
-        before: true,
-        after: true,
-      },
-    ],
+    'arrow-parens': [ 'error', 'always' ],
+    'arrow-spacing': [ 'error', { before: true, after: true } ],
     'brace-style': [ 'error', '1tbs' ],
-    camelcase: [
-      'error',
-      {
-        properties: 'never',
-      },
-    ],
+    camelcase: [ 'error', { properties: 'never' } ],
     'comma-dangle': [ 'error', 'always-multiline' ],
     'comma-spacing': 'error',
     'comma-style': 'error',
@@ -56,23 +45,10 @@ module.exports = {
     'space-before-blocks': [ 'error', 'always' ],
     'space-before-function-paren': [
       'error',
-      {
-        anonymous: 'always',
-        named: 'never',
-        asyncArrow: 'always',
-      },
+      { anonymous: 'always', named: 'never', asyncArrow: 'always' },
     ],
     'space-in-parens': [ 'error', 'always', { exceptions: [ '{}' ] } ],
-    'space-unary-ops': [
-      'error',
-      {
-        words: true,
-        nonwords: false,
-        // overrides: {
-        // 	'!': true,
-        // },
-      },
-    ],
+    'space-unary-ops': [ 'error', { words: true, nonwords: false } ],
     'template-curly-spacing': [ 'error', 'always' ],
     'vue/html-indent': [ 'error', 2 ],
   },
