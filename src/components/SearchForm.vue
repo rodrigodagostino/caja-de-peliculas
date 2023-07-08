@@ -23,14 +23,14 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 
-const searchValue = ref( route.query.q ? route.query.q : '' )
+const searchValue = ref(route.query.q ? route.query.q : '')
 
-const formStyles = computed( () =>
-  route.fullPath === '/' ? { 'margin-top': '24vh' } : { 'margin-top': '2rem' },
+const formStyles = computed(() =>
+  route.fullPath === '/' ? { 'margin-top': '24vh' } : { 'margin-top': '2rem' }
 )
 
 const submitForm = () => {
-  router.push( `/search?q=${ searchValue.value }` )
+  router.push(`/search?q=${searchValue.value}`)
 }
 </script>
 
@@ -46,13 +46,16 @@ const submitForm = () => {
   margin: 0 auto;
   background-color: var(--gray-950);
   border-radius: 0.75rem;
-  transition: background-color 0.32s ease, box-shadow 0.32s ease,
+  transition:
+    background-color 0.32s ease,
+    box-shadow 0.32s ease,
     max-width 0.32s ease;
 }
 
 .search-box:focus-within {
   background-color: var(--gray-850);
-  box-shadow: 0 0 0 2px var(--color-main),
+  box-shadow:
+    0 0 0 2px var(--color-main),
     0 0.5rem 2rem hsla(240, 11%, 4%, 0.8);
 }
 
@@ -72,7 +75,9 @@ const submitForm = () => {
   border: none;
   border-radius: 0 0.75rem 0.75rem 0;
   outline: none;
-  transition: color 0.32s ease, background-color 0.32s ease;
+  transition:
+    color 0.32s ease,
+    background-color 0.32s ease;
   cursor: pointer;
   padding: 0.75rem 1rem;
 }

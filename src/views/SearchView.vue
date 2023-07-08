@@ -7,15 +7,8 @@
       type="animation"
     >
       <BaseSpinner v-if="isFetching" size="medium" />
-      <ul
-        v-else-if="!isFetching && searchResults?.length"
-        class="search-results"
-      >
-        <SearchResult
-          v-for="result in searchResults"
-          :result="result"
-          :key="result.imdbID"
-        />
+      <ul v-else-if="!isFetching && searchResults?.length" class="search-results">
+        <SearchResult v-for="result in searchResults" :result="result" :key="result.imdbID" />
       </ul>
       <p v-else-if="!isFetching && isTitleNotFound" class="search-not-found">
         No results were found for <strong>“{{ $route.query.q }}”</strong>.
@@ -33,11 +26,11 @@ import SearchResult from '@/components/SearchResult.vue'
 const router = useRouter()
 const route = useRoute()
 
-const searchResults = ref( [] )
-const isFetching = ref( false )
-const isTitleNotFound = ref( false )
+const searchResults = ref([])
+const isFetching = ref(false)
+const isTitleNotFound = ref(false)
 
-const fetchMoviesData = searchTerm => {
+const fetchMoviesData = (searchTerm) => {
   isTitleNotFound.value = false
   isFetching.value = true
   searchResults.value = []
@@ -45,26 +38,24 @@ const fetchMoviesData = searchTerm => {
   const apiKey = import.meta.env.VITE_OMDB_API_KEY
   const apiUrl = 'https://www.omdbapi.com'
 
-  fetch( `${ apiUrl }/?apikey=${ apiKey }&s=${ searchTerm }` )
-    .then( response => response.json() )
-    .then( data => {
-      if ( data.Error === 'Movie not found!' ) {
+  fetch(`${apiUrl}/?apikey=${apiKey}&s=${searchTerm}`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.Error === 'Movie not found!') {
         isTitleNotFound.value = true
         return
       }
       searchResults.value = data.Search
       isFetching.value = false
     })
-    .catch( error => console.error( error ) )
+    .catch((error) => console.error(error))
 }
 
-onMounted( () =>
-  !route.query.q ? router.push( '/' ) : fetchMoviesData( route.query.q ),
-)
+onMounted(() => (!route.query.q ? router.push('/') : fetchMoviesData(route.query.q)))
 
-onBeforeRouteUpdate( ( to, from ) => {
-  if ( to.query.q !== from.query.q ) {
-    fetchMoviesData( to.query.q )
+onBeforeRouteUpdate((to, from) => {
+  if (to.query.q !== from.query.q) {
+    fetchMoviesData(to.query.q)
   }
 })
 </script>
@@ -88,7 +79,9 @@ onBeforeRouteUpdate( ( to, from ) => {
   text-align: center;
   margin: 1rem auto 0;
   max-width: 100%;
-  transition: font-size 0.32s ease, max-width 0.32s ease;
+  transition:
+    font-size 0.32s ease,
+    max-width 0.32s ease;
 }
 
 @media screen and (min-width: 30rem) {

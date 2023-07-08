@@ -45,10 +45,10 @@ const props = defineProps({
   },
 })
 
-const normalizedRadius = computed( () => props.radius - props.stroke / 2 )
-const circumference = computed( () => normalizedRadius.value * 2 * Math.PI )
+const normalizedRadius = computed(() => props.radius - props.stroke / 2)
+const circumference = computed(() => normalizedRadius.value * 2 * Math.PI)
 const strokeDashoffset = computed(
-  () => circumference.value - props.progress / 10 * circumference.value,
+  () => circumference.value - (props.progress / 10) * circumference.value
 )
 </script>
 

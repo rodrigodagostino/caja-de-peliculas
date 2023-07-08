@@ -52,8 +52,11 @@ defineProps({
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.32s ease, outline 0.32s ease,
-    transform 0.32s ease, box-shadow 0.32s ease;
+  transition:
+    background-color 0.32s ease,
+    outline 0.32s ease,
+    transform 0.32s ease,
+    box-shadow 0.32s ease;
   will-change: transform;
   text-decoration: none;
   outline: 2px solid transparent;
@@ -82,7 +85,8 @@ defineProps({
   }
 
   &:focus {
-    box-shadow: 0 0 0 0.125rem var(--color-main),
+    box-shadow:
+      0 0 0 0.125rem var(--color-main),
       0 0.5rem 2rem hsla(240, 11%, 4%, 0.8);
   }
 }

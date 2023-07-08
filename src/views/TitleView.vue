@@ -7,10 +7,7 @@
       type="animation"
     >
       <BaseSpinner v-if="isFetching" size="medium" />
-      <div
-        v-else-if="!isFetching && movieData.hasOwnProperty('Title')"
-        class="title__overview"
-      >
+      <div v-else-if="!isFetching && movieData.hasOwnProperty('Title')" class="title__overview">
         <picture class="title__poster">
           <img
             v-if="movieData.Poster !== 'N/A'"
@@ -55,10 +52,7 @@
             <BaseButton icon-classes="fas fa-play" @click="openTrailerModal">
               <template #default>Watch trailer</template>
             </BaseButton>
-            <BaseTooltip
-              text="Link copied"
-              :isVisible="isCopyUrlTooltipVisible"
-            >
+            <BaseTooltip text="Link copied" :isVisible="isCopyUrlTooltipVisible">
               <BaseButton
                 href="#"
                 variation="text-neutral"
@@ -69,11 +63,7 @@
                 <template #default>Copy this URL</template>
               </BaseButton>
             </BaseTooltip>
-            <input
-              class="title__url-input"
-              ref="urlInput"
-              :value="urlInputValue"
-            />
+            <input class="title__url-input" ref="urlInput" :value="urlInputValue" />
           </footer>
         </div>
       </div>
@@ -83,9 +73,7 @@
         v-if="isTrailerModalVisible && youTubeVideoData.hasOwnProperty('id')"
         @close-modal="closeTrailerModal"
       >
-        <template #title>{{
-          `${movieData.Title} (${movieData.Year})`
-        }}</template>
+        <template #title>{{ `${movieData.Title} (${movieData.Year})` }}</template>
         <template #default>
           <div class="title__trailer-container">
             <iframe
@@ -118,63 +106,63 @@ const route = useRoute()
 
 const movieData = ref({})
 const youTubeVideoData = ref({})
-const isFetching = ref( true )
-const isCopyUrlTooltipVisible = ref( false )
-const isTrailerModalVisible = ref( false )
+const isFetching = ref(true)
+const isCopyUrlTooltipVisible = ref(false)
+const isTrailerModalVisible = ref(false)
 
-const urlInput = ref( null )
+const urlInput = ref(null)
 const urlInputValue = window.location.href
 
-watch( movieData, () => {
+watch(movieData, () => {
   fetchYouTubeVideoData()
 })
 
-const fetchMovieData = id => {
+const fetchMovieData = (id) => {
   isFetching.value = true
   movieData.value = {}
   const apiKey = import.meta.env.VITE_OMDB_API_KEY
   const apiUrl = 'https://www.omdbapi.com'
-  fetch( `${ apiUrl }/?apikey=${ apiKey }&i=${ id }` )
-    .then( response => response.json() )
-    .then( data => {
+  fetch(`${apiUrl}/?apikey=${apiKey}&i=${id}`)
+    .then((response) => response.json())
+    .then((data) => {
       movieData.value = data
       isFetching.value = false
     })
-    .catch( error => console.error( error ) )
+    .catch((error) => console.error(error))
 }
 
-const openTrailerModal = () => isTrailerModalVisible.value = true
+const openTrailerModal = () => (isTrailerModalVisible.value = true)
 
-const closeTrailerModal = () => isTrailerModalVisible.value = false
+const closeTrailerModal = () => (isTrailerModalVisible.value = false)
 
 const fetchYouTubeVideoData = () => {
   youTubeVideoData.value = {}
-  if ( movieData.value.Title ) {
+  if (movieData.value.Title) {
     const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
     const q = encodeURI(
-      movieData.value.Title.replace( '&', 'and' ) +
+      movieData.value.Title.replace('&', 'and') +
         ' ' +
         movieData.value.Year +
-        ' trailer'.toLowerCase(),
+        ' trailer'.toLowerCase()
     )
     const apiUrl = 'https://youtube.googleapis.com/youtube/v3'
-    fetch( `${ apiUrl }/search?part=snippet&maxResults=1&q=${ q }&key=${ apiKey }` )
-      .then( response => response.json() )
-      .then( data => youTubeVideoData.value = data.items[ 0 ] )
-      .catch( error => console.error( error ) )
+    fetch(`${apiUrl}/search?part=snippet&maxResults=1&q=${q}&key=${apiKey}`)
+      .then((response) => response.json())
+      .then((data) => (youTubeVideoData.value = data.items[0]))
+      .catch((error) => console.error(error))
   }
 }
 
 const copyTitleUrl = () => {
   isCopyUrlTooltipVisible.value = true
-  navigator.clipboard.writeText( urlInput.value.value )
-  setTimeout( () => {
+  navigator.clipboard.writeText(urlInput.value.value)
+  setTimeout(() => {
     isCopyUrlTooltipVisible.value = false
-  }, 3000 )
+  }, 3000)
 }
 
-onMounted( () => {
-  fetchMovieData( route.params.id )
+onMounted(() => {
+  fetchMovieData(route.params.id)
 })
 </script>
 

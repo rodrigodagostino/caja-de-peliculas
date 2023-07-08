@@ -1,12 +1,8 @@
 <template>
   <footer class="site-footer">
     <div class="container">
-      <a
-        href="https://github.com/rodrigodagostino/vue-movie-search-app"
-        target="_blank"
-      >
-        Made with <img src="@/assets/vue-logo.png" alt="Vue.js logo" /> by
-        Rodrigo D’Agostino
+      <a href="https://github.com/rodrigodagostino/vue-movie-search-app" target="_blank">
+        Made with <img src="@/assets/vue-logo.png" alt="Vue.js logo" /> by Rodrigo D’Agostino
       </a>
     </div>
   </footer>

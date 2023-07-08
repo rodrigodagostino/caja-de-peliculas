@@ -78,7 +78,10 @@ const buttonClasses = {
   cursor: pointer;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
-  transition: color 0.32s ease, background-color 0.32s ease, border 0.32s ease;
+  transition:
+    color 0.32s ease,
+    background-color 0.32s ease,
+    border 0.32s ease;
   outline: none;
 }
 

@@ -27,7 +27,7 @@
 <script setup>
 import BaseButton from '@/components/BaseButton.vue'
 
-const emit = defineEmits( [ 'close-modal' ] )
+const emit = defineEmits(['close-modal'])
 </script>
 
 <style scoped>
